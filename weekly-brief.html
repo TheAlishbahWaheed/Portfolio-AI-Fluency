@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Weekly AI/ML Industry Brief — Alishbah Waheed</title>
+<meta name="description" content="A five-step prompt-chaining workflow that turns a week of AI/ML news into a sourced five-minute brief.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">
+      <span class="wordmark-text">alish<span class="match">ba</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="weekly-brief.html" aria-current="page">Weekly Brief Pipeline</a></li>
+      <li><a href="agents-mcp.html">Agents &amp; MCP</a></li>
+      <li><a class="nav-cta" href="mailto:alishbaw026@gmail.com">Email me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom: 32px;">
+  <div class="sheet">
+    <p class="kicker">Case study · Workflow design</p>
+    <h1>A five-step pipeline that reads the week of AI news so I don't have to read six mediocre blog posts to find two real facts</h1>
+    <p class="lede">Gather → Synthesize → Draft → Review → Format. A fixed, five-step "prompt chaining" workflow, run five times on five real topics — and timed honestly against doing it by hand.</p>
+  </div>
+</header>
+
+<main>
+  <section class="no-rule">
+    <div class="sheet">
+      <h2>The problem</h2>
+      <p>I wanted a five-minute weekly read that keeps me current for interviews, in a voice already built for the portfolio (clear, curious, practical, analytical, honest, confident, conversational) — so the output is immediately usable, not a generic AI digest. Doing this by hand every week means searching, skimming four to six sources, sorting real facts from filler, drafting, and editing for voice: roughly 35–45 minutes per topic.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>The decision: a workflow, not an agent</h2>
+      <p>This is a <strong>workflow</strong>, specifically the "prompt chaining" pattern — each step's output feeds the next step's input in a fixed sequence I designed before running it even once. The pipeline never chose to skip Synthesize, run Gather twice, or reorder anything; it filled in each step's content, but I owned the path.</p>
+      <p>That was the right call, not a limitation. The task is well-defined and repeatable every week, so a fixed path with predictable checkpoints — I can inspect the output between any two steps — was worth more than letting a model decide how to research a topic on its own. An agent here would add cost and unpredictability for a task that doesn't need either.</p>
+
+      <div class="step-diagram" role="img" aria-label="Five step pipeline: Gather, Synthesize, Draft, Review or Critique, Format">
+        <div class="step-box">
+          <div class="step-num">STEP 1</div>
+          <div class="step-name">Gather</div>
+          <div class="step-desc">Search real sources. Source, date, 1–2 sentence factual summary. No opinions yet.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+          <div class="step-num">STEP 2</div>
+          <div class="step-name">Synthesize</div>
+          <div class="step-desc">Extract 2–4 distinct claims. Drop anything vague or unsupported.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+          <div class="step-num">STEP 3</div>
+          <div class="step-name">Draft</div>
+          <div class="step-desc">Write 3–5 sentences in the voice card. Lead with what matters most.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+          <div class="step-num">STEP 4</div>
+          <div class="step-name">Review</div>
+          <div class="step-desc">Check every sentence traces to a claim, isn't generic, matches voice.</div>
+        </div>
+        <div class="step-arrow">→</div>
+        <div class="step-box">
+          <div class="step-num">STEP 5</div>
+          <div class="step-name">Format</div>
+          <div class="step-desc">Labeled markdown block: topic, date, brief, why it matters to me.</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>Evidence: a real run</h2>
+      <p>Five runs, five topics. Here's Run 3 — hybrid search / RAG — directly relevant to my capstone work, shown as it actually came out of Step 5:</p>
+
+      <div class="output-block">
+        <div class="output-meta">Topic: Hybrid search / RAG · Date: Aug 5, 2026</div>
+        <p style="margin-bottom:0; color:inherit;">Hybrid retrieval — combining dense and keyword search — is now measured, not just argued for: one report cites a 12% relevance boost over dense-only search. The bigger signal: multiple sources describe retrieval, not generation, as the main bottleneck in production RAG, with naive pipelines failing at retrieval roughly 40% of the time. Retrieve-then-rerank has become the default production pattern, exactly the architecture I used in my own capstone.</p>
+        <div class="why">Why it matters to me: my capstone's hybrid + rerank design isn't a workaround I invented — it's the direction the field is actually moving, which is worth saying explicitly in the case study.</div>
+      </div>
+
+      <p>Four more runs — frontier model releases, the AI hiring market, AI startup funding, and AI policy — followed the same five steps. Full transcripts of all five are in the <a href="https://github.com/TheAlishbahWaheed/flyrank-ml-internship">GitHub repo</a>.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>Outcome: the honest time math</h2>
+      <table>
+        <thead>
+          <tr><th></th><th>Manual (estimated)</th><th>Pipeline (actual, this session)</th></tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Per topic</td>
+            <td>~35–45 min: search, skim 4–6 sources, sort real vs. filler, draft, edit for voice</td>
+            <td>~6–8 min: one search call, extract claims, draft, self-check against criteria</td>
+          </tr>
+          <tr>
+            <td>Setup cost</td>
+            <td>—</td>
+            <td>~15 min, one time, to write the 5-step instruction set</td>
+          </tr>
+          <tr>
+            <td>5 topics total</td>
+            <td>~3–3.75 hours</td>
+            <td>~50–55 min total (35–40 min run time + 15 min setup)</td>
+          </tr>
+        </tbody>
+      </table>
+      <p><strong>Honest net:</strong> roughly 2–2.5 hours saved across five topics, most of it from skipping the "read six mediocre SEO blog posts to find the two real facts" phase. Gather and Synthesize are where the pipeline earns its keep — Draft and Format save comparatively little once the facts are already in hand.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>Where it breaks — what a human still has to check</h2>
+      <ul class="watch-list">
+        <li><strong>Source quality is uneven, and the pipeline doesn't filter for it on its own.</strong> SEO-farmed listicles restate "2026 trends" language with no sourcing. I have to actively reject those in Gather — it took explicit instruction to prefer named, dated sources, not default behavior.</li>
+        <li><strong>Numbers need spot-checking before they go anywhere public.</strong> Figures like a "12% relevance boost" came from aggregator sites, not primary papers — fine for an internal weekly read, not fine to repeat externally without verifying against the source.</li>
+        <li><strong>The "why it matters to me" line is the weakest, least reliable step.</strong> It's the most subjective output and the one most likely to feel generic without a personal edit.</li>
+        <li><strong>The pipeline has no memory across runs.</strong> Nothing catches if next week repeats the same story — I still have to skim last week's brief myself before running this one again.</li>
+      </ul>
+    </div>
+  </section>
+
+  <div class="sheet">
+    <div class="case-nav">
+      <a href="index.html">← Back to home</a>
+      <a href="agents-mcp.html">Next case: Agents &amp; MCP →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>Alishbah Waheed</span>
+    <div class="footer-links">
+      <a href="mailto:alishbaw026@gmail.com">alishbaw026@gmail.com</a>
+      <a href="https://github.com/TheAlishbahWaheed/flyrank-ml-internship">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

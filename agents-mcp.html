@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Workflow vs. Agent, Proven with MCP — Alishbah Waheed</title>
+<meta name="description" content="What separates a workflow from an agent, what MCP solves, and a live MCP tool connection proving it.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<nav class="site-nav">
+  <div class="nav-inner">
+    <a class="wordmark" href="index.html">
+      <span class="wordmark-text">alish<span class="match">ba</span></span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="weekly-brief.html">Weekly Brief Pipeline</a></li>
+      <li><a href="agents-mcp.html" aria-current="page">Agents &amp; MCP</a></li>
+      <li><a class="nav-cta" href="mailto:alishbaw026@gmail.com">Email me</a></li>
+    </ul>
+  </div>
+</nav>
+
+<header class="hero" style="padding-bottom: 32px;">
+  <div class="sheet">
+    <p class="kicker">Case study · Agents &amp; MCP</p>
+    <h1>Workflow vs. agent isn't a vibe — it's who owns the control flow. Here's proof, not just a diagram.</h1>
+    <p class="lede">A plain-language breakdown of two architectures, why my own pipeline is deliberately one and not the other, and a live MCP connector doing three things a plain chat window can't.</p>
+  </div>
+</header>
+
+<main>
+  <section class="no-rule">
+    <div class="sheet">
+      <h2>Workflow vs. agent, in my own words</h2>
+      <div class="def-grid">
+        <div class="def-card">
+          <h3>Workflow</h3>
+          <p style="margin-bottom:0;">I (or the developer) decide the steps ahead of time, and the LLM fills in each step. The code path is fixed — step 1 always leads to step 2, then step 3 — even though the LLM does the actual thinking inside each step. The control flow belongs to the code, not the model.</p>
+        </div>
+        <div class="def-card">
+          <h3>Agent</h3>
+          <p style="margin-bottom:0;">The LLM decides what to do next, based on what it sees in the environment. Nobody wrote "call tool A, then B, then stop" in advance — the model looks at each result and decides the next action, in a loop, until it thinks it's done or hits a limit. The control flow belongs to the model.</p>
+        </div>
+      </div>
+      <p>The cleanest test I've found: in a workflow, swap the LLM for a dumber version and the <em>shape</em> of execution doesn't change — same steps, same order, just lower quality at each one. In an agent, a dumber model might take a completely different path through the same tools, because the path was never fixed.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>Classifying my own pipeline</h2>
+      <p>My <a href="weekly-brief.html">weekly-brief pipeline</a> is a <strong>workflow</strong> — specifically prompt chaining. I decided there would be exactly five steps, in that order, before running it even once. The LLM never chose to skip a step or reorder anything; it filled in content, but I owned the path. That was the right call: the task is well-defined and repeatable, so a fixed path with inspectable checkpoints was worth more than letting a model improvise research on its own.</p>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>What MCP actually solves</h2>
+      <p>MCP (Model Context Protocol) is a standard way to connect a model to things outside its own head — files, live data, other services — without every AI application needing a custom one-off integration for every tool. Anthropic's framing fits: a single standard connector instead of a different plug for every device, the way USB-C replaced a drawer of proprietary cables.</p>
+      <p>Before MCP, connecting Claude to Google Drive <em>and</em> arXiv <em>and</em> a database meant building three separate custom integrations that wouldn't transfer to any other AI application. With MCP, a server built once for one service plugs into any MCP-compatible client.</p>
+
+      <h3 style="margin-top:36px;">Three primitives — who decides when it gets used</h3>
+      <div class="evidence-card" style="border-left-color: var(--signal);">
+        <div class="primitive-row">
+          <span class="primitive-name">Tools</span>
+          <span>Actions the <em>model</em> calls on its own — it decides, mid-conversation, "I need this." Below, the model chose to call three tools in sequence, based on what each returned.</span>
+        </div>
+        <div class="primitive-row">
+          <span class="primitive-name">Resources</span>
+          <span>Read-only data the <em>application</em> hands the model, not something the model reaches for itself — data placed in front of the model, not an action it takes.</span>
+        </div>
+        <div class="primitive-row">
+          <span class="primitive-name">Prompts</span>
+          <span>Reusable, user-triggered templates — a person picks "run the weekly report" and the server executes a predetermined set of steps.</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>Evidence: three real tool calls, not a diagram</h2>
+      <p>I connected the alphaXiv MCP server and ran three real calls — each one something plain chat alone cannot do:</p>
+
+      <div class="evidence-card">
+        <div class="evidence-label">1 · discover_papers</div>
+        <p style="margin-bottom:0;">Searched arXiv live for recent (2026) papers on hybrid retrieval and reranking. Returned a ranked list of actual, dated papers, including one published the day before this conversation (2026-08-04) — not something available from training data alone.</p>
+      </div>
+
+      <div class="evidence-card">
+        <div class="evidence-label">2 · answer_pdf_queries</div>
+        <p style="margin-bottom:0;">Pulled specific, cited content out of the full PDF of a hybrid retrieval and reranking paper (arXiv 2605.01664) — exact methodology, plus a citation-grounding result of 100% claim-level grounding accuracy on its 25-query pilot. Plain chat has no access to a PDF's full text or precise figures — only whatever summary happened to be in training data, if anything.</p>
+      </div>
+
+      <div class="evidence-card">
+        <div class="evidence-label">3 · read_files_from_github_repository</div>
+        <p style="margin-bottom:0;">Read the actual source and README of a live GitHub repository — facebookresearch/DPR (Dense Passage Retrieval, the foundational hybrid-retrieval paper cited across several other searches this session) — with live file sizes and full contents pulled at request time, not recalled from memory.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="sheet">
+      <h2>What this pipeline would need to become an agent</h2>
+      <p>Right now the weekly-brief workflow is fixed: five steps, always the same order, one topic per run. To make it an actual agent, the biggest change would be handing the model the decision of <em>what to research and how deep to go</em>, instead of me handing it a topic and a five-step script.</p>
+      <p>Concretely: instead of picking five topics and running the same five steps on each, I'd give the model a goal — "build a comprehensive AI/ML weekly brief" — plus a toolset (web search, the alphaXiv connector, maybe last week's brief as memory) and let it decide how many topics matter, which deserve a deep dive versus a mention, and when it's gathered enough to stop and write.</p>
+      <p>The tradeoff is real: an agent here costs more (tokens, tool calls, unpredictable runtime) and is harder to audit — I can't diff this week's five fixed steps against last week's. For a task this small and repeatable, that tradeoff isn't worth it yet. But it's the concrete next step if the workflow ever needs to handle "figure out what's worth covering," not just "cover what I already picked."</p>
+    </div>
+  </section>
+
+  <div class="sheet">
+    <div class="case-nav">
+      <a href="weekly-brief.html">← Previous case: Weekly Brief Pipeline</a>
+      <a href="index.html">Back to home →</a>
+    </div>
+  </div>
+</main>
+
+<footer class="site-footer">
+  <div class="footer-inner">
+    <span>Alishbah Waheed</span>
+    <div class="footer-links">
+      <a href="mailto:alishbaw026@gmail.com">alishbaw026@gmail.com</a>
+      <a href="https://github.com/TheAlishbahWaheed/flyrank-ml-internship">GitHub</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
